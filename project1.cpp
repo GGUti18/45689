@@ -1,163 +1,48 @@
-1)
-#include <iostream>
-using namespace std;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-void max_min()
+namespace Laba7
 {
-    int A[6][6];
-
-    for (int i = 0; i < 6; i++)
-        for (int j = 0; j < 6; j++)
-            A[i][j] = rand() % 10;
-
-    int max = A[0][0];
-    int min = A[0][0];
-
-    for (int i = 0; i < 6; i++)
+    internal class Program
     {
-        for (int j = 0; j < 6; j++)
+        static void Main(string[] args)
         {
-            if (A[i][j] > max)
-                max = A[i][j];
-
-            if (A[i][j] < min)
-                min = A[i][j];
+             -1-             
+int a1 = 1, a2 = 2, a3 = 3, a4 = 4;
+            int start = -4, end = 4;
+            double step = 0.2;
+            double x = start;
+            Console.WriteLine($"\t\tA = {a1}\n");
+            Y_to_console(start, end, step, a1);
+            Console.WriteLine($"\n\t\tA = {a2}\n");
+            Y_to_console(start, end, step, a2);
+            Console.WriteLine($"\n\t\tA = {a3}\n");
+            Y_to_console(start, end, step, a3);
+            Console.WriteLine($"\n\t\tA = {a4}\n");
+            Y_to_console(start, end, step, a4);
+            
+        }
+        static public double Func(double x, int a)
+        {
+            double h1 = 0, h2 = 0;
+            if (x + a < 0) { h1 = Math.Pow(-(x + a), 2.0 / 3); h1 *= -1; }
+            else h1 = Math.Pow(x + a, 2.0 / 3);
+            if (x - a < 0) { h2 = Math.Pow(-(x - a), 2.0 / 3); h2 *= -1; }
+            else h2 = Math.Pow(x - a, 2.0 / 3);
+            return (h1 - h2) / a;
+        }
+        static public void Y_to_console(int start, int end, double step, int a)
+        {
+            double x = start;
+            for (; x < end + step; x += step, x = Math.Round(x, 1))
+                Console.WriteLine($"x = {x}\t\t{Func(x, a)}");
         }
     }
-
-    cout << "max = " << max << endl;
-    cout << "min = " << min << endl;
-
-    cout << endl;
-
-    for (int j = 0; j < 6; j++)
-    {
-        for (int i = 0; i < 6; i++)
-            cout << A[i][j] << " ";
-
-        cout << endl;
-    }
 }
-
-2)
-#include <iostream>
-#include <time.h>
-#include <math.h>
-using namespace std;
-
-int main()
-{
-	srand(time(NULL));
-
-	int A[6][4];
-
-	for (int i = 0; i < 6; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			A[i][j] = rand() % 10;
-			cout << A[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-	int buf = 0;
-	int min = 0;
-	int col = 0;
-	int minA[4];
-
-	for (int j = 0; j < 4; j++)
-	{
-		min += A[j][0];
-	}
-
-	for (int i = 1; i < 6; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			buf += A[j][i];
-		}
-
-		if (min > buf)
-		{
-			min = buf;
-			col = i;
-
-		}
-		buf = 0;
-
-	}
-	cout << endl;
-	for (int j = 0; j < 4; j++)
-	{
-		minA[j] = A[j][col];
-	}
-
-	for (int j = 0; j < 4; j++)
-	{
-		cout << minA[j] << " ";
-	}
+2) using System;  namespace Laba7 {     internal class Program     {         static void Main(string[] args)         {             double x = Convert.ToDouble(Console.ReadLine());             double sum = CalculateSeries(x);             Console.WriteLine($"Sum = {sum}");         }          static double CalculateSeries(double x)         {             if (x > 1)             {                 return double.PositiveInfinity;             }              double sum = 0;             double term = x;             int n = 1;             double stop = Math.Pow(10, -6);              while (Math.Abs(term) > stop)             {                 sum += term;                 n += 2;                 term = -Math.Pow(x, n) / n;             }              return sum;         }     } } 
 
 
-	cout << endl;
-	cout << endl;
-
-
-}
-
-3)
-#include <iostream>
-#include <time.h>
-#include <math.h>
-using namespace std;
-
-int main()
-{
-	srand(time(NULL));
-	const int row = 8;
-	const int col = 3;
-	double arr[row][col];
-
-	double res[col];
-	double d = 0, d1 = 0;
-	int index = 0;
-
-	for (size_t j = 0; j < col; j++)
-		res[j] = arr[0][j];
-
-	for (size_t i = 0; i < row; i++)
-	{
-		for (size_t j = 0; j < col; j++)
-		{
-			arr[i][j] = rand() % 10;
-
-			cout << arr[i][j] << " ";
-		}
-		cout << endl;
-	}
-	int c = 0;
-	while (c < col)
-		d += abs(arr[0][c] + arr[2][c++]);
-	cout << "\nd: " << d << endl;
-	cout << endl;
-
-	for (size_t i = 1; i < row; i++)
-	{
-		for (size_t j = 0; j < col; j++)
-			d1 += abs(arr[i][j] + arr[2][j]);
-
-		cout << d1 << " ";
-		if (d1 < d)
-		{
-			d = d1;
-			index = i;
-		}
-		d1 = 0;
-	}
-	cout << endl;
-	for (size_t i = 0; i < col; i++)
-	{
-		res[i] = arr[index][i];
-		cout << res[i] << " ";
-	}
-}
+	
