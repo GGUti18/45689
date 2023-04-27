@@ -42,7 +42,65 @@ int a1 = 1, a2 = 2, a3 = 3, a4 = 4;
         }
     }
 }
-2) using System;  namespace Laba7 {     internal class Program     {         static void Main(string[] args)         {             double x = Convert.ToDouble(Console.ReadLine());             double sum = CalculateSeries(x);             Console.WriteLine($"Sum = {sum}");         }          static double CalculateSeries(double x)         {             if (x > 1)             {                 return double.PositiveInfinity;             }              double sum = 0;             double term = x;             int n = 1;             double stop = Math.Pow(10, -6);              while (Math.Abs(term) > stop)             {                 sum += term;                 n += 2;                 term = -Math.Pow(x, n) / n;             }              return sum;         }     } } 
+
+2)
+	using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba7
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            // -2-  //
+            double s = 0, x = 0, stop = Math.Pow(10, -6);
+            x = Convert.ToDouble(Console.ReadLine());
+            if (x <= 1)
+            {
+                int extent = 1, number = 1;
+                for (double i = x; Math.Abs(i) > stop; s += i)
+                {
+                    x = Math.Pow(x, extent += 2);
+                    i = -x / (number += 2);
+                    Console.WriteLine($"y = {i}");
+                }
+                Console.WriteLine($"\n\nSum = {s}");
+            }
+            else
+                Console.WriteLine($"Sum = Infinity");
+        }
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	
